@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entities/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Opponent.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level.gdns" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 640, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 50, 400 )
+
+[node name="Level" type="Node"]
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0784314, 0.129412, 0.14902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+speed = 400.0
+
+[node name="OpponentScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Opponent" parent="." instance=ExtResource( 3 )]
+
+[node name="Ball" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 360 )
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+position = Vector2( 640, -10 )
+shape = SubResource( 1 )
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2( 0, 720 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+position = Vector2( 640, 10 )
+shape = SubResource( 1 )
+
+[node name="LeftArea" type="Area2D" parent="."]
+position = Vector2( -1, 360 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea"]
+position = Vector2( -50, 0 )
+shape = SubResource( 2 )
+
+[node name="RightArea" type="Area2D" parent="."]
+position = Vector2( 1281, 360 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea"]
+position = Vector2( 50, 0 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="LeftArea" to="." method="_on_side_area_body_entered"]
+[connection signal="body_entered" from="RightArea" to="." method="_on_side_area_body_entered"]
