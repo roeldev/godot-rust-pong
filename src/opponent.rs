@@ -9,7 +9,7 @@ use crate::level;
 pub struct Opponent {
     #[property(default = 400.0)]
     speed: f32,
-    #[property(default = 25.0)]
+    #[property(default = 10.0)]
     accuracy: f32,
 
     level: Ref<Node>,
@@ -19,8 +19,8 @@ pub struct Opponent {
 impl Opponent {
     fn new(_owner: &KinematicBody2D) -> Self {
         Opponent {
-            speed: 500.0,
-            accuracy: 25.0,
+            speed: 400.0,
+            accuracy: 10.0,
             level: Node::new().into_shared(),
         }
     }
@@ -34,7 +34,7 @@ impl Opponent {
     }
 
     #[export]
-    fn _physics_process(&self, owner: &KinematicBody2D, _dt: f32) {
+    fn _process(&self, owner: &KinematicBody2D, _dt: f32) {
         owner.move_and_slide(
             self.get_direction(owner.position()).mul(self.speed),
             Vector2::zero(),

@@ -1,0 +1,8 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://assets/PoetsenOne-Regular.ttf" type="DynamicFontData" id=1]
+
+[resource]
+size = 40
+outline_color = Color( 0.85098, 0.847059, 0.843137, 1 )
+font_data = ExtResource( 1 )

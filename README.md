@@ -7,6 +7,6 @@ This project is the result of following the tutorial by Clear Code, [`Learn Godo
  <a href="https://godotengine.org/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" width=35 /></a>
 
 ## License
-Copyright © 2020-2021 [Roel Schut](https://roelschut.nl). All rights reserved.
+Copyright © 2021 [Roel Schut](https://roelschut.nl). All rights reserved.
 
 This project is governed by a BSD-style license that can be found in the [LICENSE](LICENSE) file.

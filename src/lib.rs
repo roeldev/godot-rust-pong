@@ -6,7 +6,7 @@ mod level;
 mod ball;
 mod opponent;
 mod player;
-// mod utils;
+mod utils;
 
 fn init(handle: InitHandle) {
     handle.add_class::<level::Level>();

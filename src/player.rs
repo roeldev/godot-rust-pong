@@ -23,7 +23,7 @@ impl Player {
     // }
 
     #[export]
-    fn _physics_process(&self, owner: &KinematicBody2D, _dt: f32) {
+    fn _process(&self, owner: &KinematicBody2D, _dt: f32) {
         let mut velocity = Vector2::zero();
 
         let input = Input::godot_singleton();
