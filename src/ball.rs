@@ -43,6 +43,7 @@ impl Ball {
 
                 let collision = unsafe { collision.assume_safe() };
                 self.velocity = self.velocity.reflect(collision.normal());
+                self.speed *= 1.01
             }
             _ => {}
         }
