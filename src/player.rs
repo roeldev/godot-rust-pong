@@ -21,11 +21,6 @@ impl Player {
         }
     }
 
-    // #[export]
-    // fn _ready(&self, _owner: &KinematicBody2D) {
-    //     godot_print!("player ready");
-    // }
-
     #[export]
     fn _process(&self, owner: &KinematicBody2D, _dt: f32) {
         let mut velocity = Vector2::zero();
