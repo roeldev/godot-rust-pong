@@ -7,10 +7,10 @@
 [ext_resource path="res://assets/PoetsenOne-Regular.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/ping_pong_8bit_plop.ogg" type="AudioStream" id=6]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 10 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 50, 400 )
 
 [node name="Level" type="Node"]
@@ -19,6 +19,8 @@ script = ExtResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -4.0
+margin_right = -4.0
 color = Color( 0.0784314, 0.129412, 0.14902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,7 +68,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
 position = Vector2( 640, -10 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="WallBottom" type="StaticBody2D" parent="."]
 position = Vector2( 0, 720 )
@@ -77,7 +79,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
 position = Vector2( 640, 10 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="LeftArea" type="Area2D" parent="."]
 position = Vector2( -1, 360 )
@@ -88,7 +90,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea"]
 position = Vector2( -50, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="RightArea" type="Area2D" parent="."]
 position = Vector2( 1281, 360 )
@@ -99,7 +101,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea"]
 position = Vector2( 50, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CountdownTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -120,6 +122,7 @@ __meta__ = {
 
 [node name="ScoreSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
 [connection signal="body_entered" from="LeftArea" to="." method="_on_left_area_body_entered" flags=3]
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered" flags=3]
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]

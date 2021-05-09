@@ -2,9 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+use std::borrow::Borrow;
+use std::ops::Mul;
+
+use gdnative::api::KinematicBody2D;
 use gdnative::prelude::*;
-use gdnative::api::{KinematicBody2D};
-use std::ops::{Mul};
 
 use crate::level;
 
@@ -31,10 +33,9 @@ impl Opponent {
 
     #[export]
     fn _ready(&mut self, owner: &KinematicBody2D) {
-        // todo: figure out how to do with trait
         self.level = owner.
-            find_parent(GodotString::from_str("Level"))
-            .expect("Should find Level")
+            find_parent("Level")
+            .expect("Failed to find Level parent")
     }
 
     #[export]
@@ -49,6 +50,7 @@ impl Opponent {
         );
     }
 
+    #[inline]
     fn get_level_instance(&self) -> RefInstance<level::Level, Shared> {
         let level = unsafe { self.level.assume_safe() };
         level.cast_instance::<level::Level>()
@@ -56,16 +58,16 @@ impl Opponent {
     }
 
     pub fn get_direction(&self, position: Vector2) -> Vector2 {
-        let ball = self.get_level_instance()
-            .map(|level, _| { level.get_ball_owner() })
-            .expect("Failed to get ball from Level");
+        let diff = self.get_level_instance()
+            .borrow()
+            .map(|level, _| {
+                level.get_ball_owner().position().y - position.y
+            })
+            .unwrap_or(0.0);
 
-        let ball = unsafe { ball.assume_safe() };
-        let diff = ball.position().y - position.y;
-
-        return Vector2::new(
+        Vector2::new(
             0.0,
             if diff > self.accuracy { 1.0 } else if diff < -self.accuracy { -1.0 } else { 0.0 },
-        );
+        )
     }
 }

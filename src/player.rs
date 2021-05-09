@@ -2,9 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-use gdnative::prelude::*;
-use gdnative::api::{KinematicBody2D};
 use std::ops::Mul;
+
+use gdnative::api::KinematicBody2D;
+use gdnative::prelude::*;
 
 #[derive(NativeClass)]
 #[inherit(KinematicBody2D)]
